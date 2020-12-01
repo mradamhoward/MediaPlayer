@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="rootLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="importLocal" mnemonicParsing="false" onAction="#importLocals" text="Import Files" />
+                  <MenuItem fx:id="downloadFromMenu" mnemonicParsing="false" onAction="#downloadRemoteFiles" text="Download Files" />
+                  <MenuItem fx:id="downloadEncrypt" mnemonicParsing="false" onAction="#downloadSecure" text="Download Encrypted" />
+                  <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <right>
+      <Pane prefHeight="875.0" prefWidth="299.0" BorderPane.alignment="CENTER">
+         <children>
+            <ListView fx:id="listv" editable="true" layoutY="28.0" opacity="0.73" prefHeight="847.0" prefWidth="300.0" />
+            <Slider fx:id="volume" layoutX="4.0" layoutY="2.0" onDragDetected="#setVolume" onMouseClicked="#setVolume" onSwipeLeft="#setVolume" prefHeight="24.0" prefWidth="293.0" showTickMarks="true" stylesheets="@style.css" value="100.0">
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor>
+            </Slider>
+         </children>
+      </Pane>
+   </right>
+   <center>
+      <Pane prefHeight="875.0" prefWidth="787.0" BorderPane.alignment="CENTER">
+         <children>
+            <TabPane fx:id="tabPane" accessibleText="Images" blendMode="ADD" layoutY="1.0" maxWidth="981.0" prefHeight="791.0" prefWidth="981.0" style="-fx-tab-min-width: 200;" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="tabMusic" onSelectionChanged="#loadListViewFromTab" text="Music">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="767.0" prefWidth="981.0">
+                           <children>
+                              <HBox fx:id="labelBox" alignment="CENTER" layoutX="35.0" layoutY="630.0" prefHeight="100.0" prefWidth="933.0">
+                                 <children>
+                                    <Label fx:id="currentSongLbl" alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="813.0" text="Song Name">
+                                       <font>
+                                          <Font size="44.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                <Tab fx:id="tabVideo" onSelectionChanged="#loadListViewFromTab" text="Videos">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="763.0" prefWidth="779.0">
+                           <children>
+                              <Label layoutX="464.0" layoutY="701.0" text="Playing Video" />
+                              <MediaView fx:id="mediaView" blendMode="OVERLAY" fitHeight="600.0" fitWidth="1000.0" focusTraversable="true" layoutX="-9.0" smooth="false">
+                                 <viewport>
+                                    <Rectangle2D height="600.0" minX="1000.0" minY="600.0" width="1000.0" />
+                                 </viewport>
+                              </MediaView>
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab fx:id="tabImage" onSelectionChanged="#loadListViewFromTab" text="Images">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="762.0" prefWidth="976.0">
+                           <children>
+                              <ImageView fx:id="imageViewer" fitHeight="756.0" fitWidth="975.0" layoutX="2.0" layoutY="2.0" nodeOrientation="INHERIT" pickOnBounds="true" />
+                           </children></AnchorPane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+            <Pane layoutX="-2.0" layoutY="793.0" prefHeight="83.0" prefWidth="986.0">
+               <children>
+                  <Slider fx:id="progress" layoutX="12.0" prefHeight="16.0" prefWidth="962.0" />
+                  <Label fx:id="startLb" layoutX="12.0" layoutY="21.0" text="0:00" />
+                  <Label fx:id="endLb" layoutX="949.0" layoutY="21.0" text="3:20" />
+                  <HBox fx:id="dhb" layoutX="428.0" layoutY="11.0" prefHeight="67.0" prefWidth="130.0">
+                     <children>
+                        <ToggleButton fx:id="tb" mnemonicParsing="false" onAction="#play" prefHeight="65.0" prefWidth="57.0" stylesheets="@styleButton.css">
+                           <effect>
+                              <ImageInput x="5.0" y="7.0">
+                                 <source>
+                                    <Image url="file:/C:/Users/Adam/workspace/ChallengingLabs/src/title2.png" />
+                                 </source>
+                              </ImageInput>
+                           </effect>
+                        </ToggleButton>
+                        <ToggleButton fx:id="pauseButt" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#pause" prefHeight="62.0" prefWidth="59.0" stylesheets="@styleButton.css">
+                           <effect>
+                              <ImageInput x="5.0" y="1.0">
+                                 <source>
+                                    <Image url="file:/C:/Users/Adam/workspace/ChallengingLabs/src/pause.png" />
+                                 </source>
+                              </ImageInput>
+                           </effect>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </ToggleButton>
+                     </children>
+                  </HBox>
+                  <Button fx:id="next" layoutX="606.0" layoutY="29.0" mnemonicParsing="false" onAction="#incrementSelection" text="&gt;" />
+                  <Button fx:id="previous" layoutX="357.0" layoutY="29.0" mnemonicParsing="false" onAction="#decrementSelection" text="&lt;" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

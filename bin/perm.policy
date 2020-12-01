@@ -1,0 +1,6 @@
+grant codeBase "file:C:\Users\Adam\workspace\ChallengingLabs\bin"{
+	// Allow everything for now
+	permission java.security.AllPermission;
+	permission java.io.FilePermission "C:/Files/", "write";
+	permission java.io.FilePermission "C:/Files/", "read";
+};
